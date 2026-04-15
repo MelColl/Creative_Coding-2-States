@@ -11,7 +11,11 @@ let label = "";
 
 //images
 let img_1; 
+
+
 let img_2;
+
+
 let img_3;
 
 if (label == "bulbasaur") {
