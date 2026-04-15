@@ -17,8 +17,11 @@ let img_3;
 if (label == "bulbasaur") {
   image(img_2, width/2, height/2, 250, 250); // NEW
 }
-else {
+if (label == "pikachu") {
   image(img_1, width/2, height/2, 250, 250); // NEW
+}
+else {
+  image(img_3, width/2, height/2, 250, 250); // NEW
 } 
 
 
