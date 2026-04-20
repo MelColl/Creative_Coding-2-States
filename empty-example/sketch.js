@@ -28,9 +28,9 @@ else {
 // Load the model first
 function preload() {
   classifier = ml5.imageClassifier(imageModelURL + 'model.json');
-  img_1 = loadImage('pikachu.png'); // NEW
-  img_2 = loadImage('bulbasaur.png'); // NEW
-  img_3 = loadImage('idle.png'); // NEW
+  img_1 = loadImage('Pikachu_State.jpeg'); // NEW
+  img_2 = loadImage('Bulbasaur_State.jpeg'); // NEW
+  img_3 = loadImage('Idle_State.jpeg'); // NEW
 }
 
 function setup() {
