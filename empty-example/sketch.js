@@ -20,12 +20,12 @@ let img_3;
 function preload() {
   classifier = ml5.imageClassifier(imageModelURL + 'model.json');
   img_1 = loadImage(
-    'images/Pikachu_State.jpeg',
+    'images/PikachuState.jpeg',
     () => console.log("loaded pikachu"),
     () => console.log("FAILED pikachu")
    ); // NEW
-  img_2 = loadImage('images/Bulbasaur_State.jpeg'); // NEW
-  img_3 = loadImage('images/Idle_State.jpeg'); // NEW
+  img_2 = loadImage('images/BulbasaurState.jpeg'); // NEW
+  img_3 = loadImage('images/IdleState.jpeg'); // NEW
 }
 
 function setup() {
