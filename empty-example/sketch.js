@@ -1,7 +1,7 @@
 // Classifier Variable
 let classifier;
 // Model URL
-let imageMode1URL = './teachablemachine/';
+let imageMode1URL = './teachablemachine';
 
 let img_1;
 let img_2;
@@ -16,11 +16,16 @@ let label = "";
 
 // Load the model first
 function preload() {
-  classifier = ml5.imageClassifier(imageMode1URL + 'model.json');
-  img_1 = loadImage('images/pikachu.jpeg'); // NEW
+   console.log("PRELOAD IS RUNNING");
+  classifier = ml5.imageClassifier('./teachablemachine/model.json');
+  img_1 = loadImage('images/pikachu.jpeg',
+    () => console.log("pikachu loaded"),
+    () => console.log("pikachu FAILED")
+    );
+   // NEW
   img_2 = loadImage('images/bulbasaur.jpeg'); // NEW
   img_3 = loadImage('images/idle.jpeg'); // NEW
-}
+  }
 
 function setup() {
   createCanvas(600, 600);
@@ -37,26 +42,28 @@ function setup() {
 
 function draw() {
   background(0);
-  imageMode1URL(CORNER);
+ // imageMode1URL(CORNER);
   // Draw the video
-  image(flippedVideo, 0, 0);
+  //image(flippedVideo, 0, 0);
   imageMode(CENTER);
-  image(img_1, width/2, height/2, 600, 600);
+  
+
+  console.log(label);
 
   // Draw the label
-  fill(255);
-  textSize(16);
-  textAlign(CENTER);
-  text(label, width / 2, height - 4);
+  //fill(255);
+  //textSize(16);
+  //textAlign(CENTER);
+  //text(label, width / 2, height - 4);
 
   if (label == "bulbasaur") {
-    image(img_2, width/2, height/2, 250, 250); // NEW
+    image(img_2, width/2, height/2, 600, 600); // NEW
     }
 else if (label == "pikachu") {
-   image(img_1, width/2, height/2, 250, 250); // NEW
+   image(img_1, width/2, height/2, 600, 600); // NEW
     }
 else  {
-   image(img_3, width/2, height/2, 250, 250); // NEW
+   image(img_3, width/2, height/2, 600, 600); // NEW
   } 
 }
 
