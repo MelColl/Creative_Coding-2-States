@@ -14,15 +14,6 @@ let img_1;
 let img_2;
 let img_3;
 
-if (label == "bulbasaur") {
-  image(img_2, width/2, height/2, 250, 250); // NEW
-}
-if (label == "pikachu") {
-  image(img_1, width/2, height/2, 250, 250); // NEW
-}
-else {
-  image(img_3, width/2, height/2, 250, 250); // NEW
-} 
 
 
 // Load the model first
@@ -56,6 +47,16 @@ function draw() {
   textSize(16);
   textAlign(CENTER);
   text(label, width / 2, height - 4);
+
+  if (label == "bulbasaur") {
+  image(img_2, width/2, height/2, 250, 250); // NEW
+}
+else if (label == "pikachu") {
+  image(img_1, width/2, height/2, 250, 250); // NEW
+}
+else {
+  image(img_3, width/2, height/2, 250, 250); // NEW
+} 
 }
 
 // Get a prediction for the current video frame
