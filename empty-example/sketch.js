@@ -14,11 +14,6 @@ let candidateLabel = "";
 let labelTimer = 0;
 let holdTime = 20; // frames (~0.25 sec)
 
-//flash
-let currentState = "";
-let previousState = "";
-let fadeAlpha = 0;
-let flashAlpha = 0;
 
 // Video
 let video;
