@@ -3,10 +3,15 @@ let classifier;
 // Model URL
 let imageMode1URL = './teachablemachine';
 
+//sound
+let pikachuSound, bulbasaurSound;
+let currentState = "";
+
 //images
 let img_1;
 let img_2;
 let img_3;
+
 
 //stability
 let stableLabel = "";
@@ -28,11 +33,14 @@ function preload() {
   img_1 = loadImage('images/pikachu.jpeg');
   img_2 = loadImage('images/bulbasaur.jpeg'); 
   img_3 = loadImage('images/idle.jpeg');
-  idleSound = loadSound('sounds/idlemusic.mp3');
+  pikachuSound = loadSound('sounds/pikachumusic.mp3');
+  bulbasaurSound = loadSound ('sounds/idlemusic.mp3');
+
   }
 
 function setup() {
   createCanvas(600, 600);
+  userStartAudio();
  // imageModeURL(CENTER);
   // Create the video
   video = createCapture(VIDEO);
@@ -47,8 +55,41 @@ function setup() {
 function draw() {
   background(0);
  // imageMode1URL(CORNER);
+ if (stableLabel !== currentState) {
+
+  currentState = stableLabel;
+
+  // ONLY stop the OTHER sound (prevents overlap)
+  pikachuSound.stop();
+  bulbasaurSound.stop();
+
+  if (currentState === "pikachu") {
+    pikachuSound.play();
+  }
+  else if (currentState === "bulbasaur") {
+    bulbasaurSound.play();
+  }
+}
   // Draw the video
   imageMode(CENTER);
+   if (stableLabel !== currentState) {
+
+    currentState = stableLabel;
+
+    pikachuMusic.stop();
+    bulbasaurMusic.stop();
+    idleMusic.stop();
+
+    if (currentState === "pikachu") {
+      pikachuMusic.loop();
+    }
+    else if (currentState === "bulbasaur") {
+      bulbasaurMusic.loop();
+    }
+    else {
+      idleMusic.loop();
+    }
+  }
   if (stableLabel == "bulbasaur") {
     image(img_2, width/2, height/2, 600, 600); // NEW
     }
@@ -58,6 +99,7 @@ else if (stableLabel == "pikachu") {
 else  {
    image(img_3, width/2, height/2, 600, 600); // NEW
   } 
+  
 }
 
   
