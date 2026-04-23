@@ -39,7 +39,7 @@ function preload() {
   }
 //set up canvas and video capture
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(800, 800);
   userStartAudio();
  // imageModeURL(CENTER);
   // Create the video
@@ -74,13 +74,13 @@ function draw() {
   // draw the video and adds own images 
   imageMode(CENTER);
   if (stableLabel == "bulbasaur") {
-    image(img_2, width/2, height/2, 1000, 1000); // NEW
+    image(img_2, width/2, height/2, 800, 800); // NEW
     }
 else if (stableLabel == "pikachu") {
-   image(img_1, width/2, height/2, 1000, 1000); // NEW
+   image(img_1, width/2, height/2, 800, 800); // NEW
     }
 else  {
-   image(img_3, width/2, height/2, 1000, 1000); // NEW
+   image(img_3, width/2, height/2, 800, 800); // NEW
   } 
   
 }
