@@ -1,4 +1,4 @@
-// Classifier Variable
+// teachable machine classifiers
 let classifier;
 // Model URL
 let imageMode1URL = './teachablemachine';
@@ -7,27 +7,27 @@ let imageMode1URL = './teachablemachine';
 let pikachuSound, bulbasaurSound;
 let currentState = "";
 
-//images
+//images classifiers
 let img_1;
 let img_2;
 let img_3;
 
 
-//stability
+//stability classifiers
 let stableLabel = "";
 let candidateLabel = "";
 let labelTimer = 0;
-let holdTime = 20; // frames (~0.25 sec)
+let holdTime = 20; // frames (~0.25 sec) // holds image for a little longer 
 
 
-// Video
+// video classifiers
 let video;
 let flippedVideo;
-// To store the classification
+// to store the classification
 let label = "";
 
 
-// Load the model first
+// preloads the teachable machine model first, uses classifiers to load correct images
 function preload() {
   classifier = ml5.imageClassifier('./teachablemachine/model.json');
   img_1 = loadImage('images/pikachu.jpeg');
@@ -37,9 +37,9 @@ function preload() {
   bulbasaurSound = loadSound ('sounds/idlemusic.mp3');
 
   }
-
+//set up canvas and video capture
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(1000, 1000);
   userStartAudio();
  // imageModeURL(CENTER);
   // Create the video
@@ -54,12 +54,13 @@ function setup() {
 
 function draw() {
   background(0);
+
  // imageMode1URL(CORNER);
  if (stableLabel !== currentState) {
 
   currentState = stableLabel;
 
-  // ONLY stop the OTHER sound (prevents overlap)
+  // should prevent overlap issues I had - Got help from ChatGPT 
   pikachuSound.stop();
   bulbasaurSound.stop();
 
@@ -70,50 +71,32 @@ function draw() {
     bulbasaurSound.play();
   }
 }
-  // Draw the video
+  // draw the video and adds own images 
   imageMode(CENTER);
-   if (stableLabel !== currentState) {
-
-    currentState = stableLabel;
-
-    pikachuMusic.stop();
-    bulbasaurMusic.stop();
-    idleMusic.stop();
-
-    if (currentState === "pikachu") {
-      pikachuMusic.loop();
-    }
-    else if (currentState === "bulbasaur") {
-      bulbasaurMusic.loop();
-    }
-    else {
-      idleMusic.loop();
-    }
-  }
   if (stableLabel == "bulbasaur") {
-    image(img_2, width/2, height/2, 600, 600); // NEW
+    image(img_2, width/2, height/2, 1000, 1000); // NEW
     }
 else if (stableLabel == "pikachu") {
-   image(img_1, width/2, height/2, 600, 600); // NEW
+   image(img_1, width/2, height/2, 1000, 1000); // NEW
     }
 else  {
-   image(img_3, width/2, height/2, 600, 600); // NEW
+   image(img_3, width/2, height/2, 1000, 1000); // NEW
   } 
   
 }
 
   
 
-// Get a prediction for the current video frame
+// get a prediction for the current video frame
 function classifyVideo() {
   flippedVideo = ml5.flipImage(video)
   classifier.classify(flippedVideo, gotResult);
   flippedVideo.remove();
 }
 
-// When we get a result
+// when we get a result
 function gotResult(error, results) {
-  // If there is an error
+  // if there is an error
   if (error) {
     console.error(error);
     return;
@@ -124,7 +107,7 @@ function gotResult(error, results) {
   }
   let newLabel = results[0].label;
 
-  // If model suggests same label, increase timer
+  // if model suggests same label, increases timer - Used ChatGPT
   if (newLabel === candidateLabel) {
     labelTimer++;
   } else {
@@ -132,7 +115,7 @@ function gotResult(error, results) {
     labelTimer = 0;
   }
 
-  // Only accept if stable long enough
+  // only accept if stable long enough
   if (labelTimer > holdTime) {
     stableLabel = candidateLabel;
   }
@@ -140,7 +123,7 @@ function gotResult(error, results) {
   else {
     stableLabel = "idle";
   }
-  // The results are in an array ordered by confidence.
+  // the results are in an array ordered by confidence
   console.log(results);
   label = results[0].label;
   // Classifiy again!
